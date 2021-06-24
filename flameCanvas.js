@@ -364,6 +364,7 @@ function init(){
 
     lastFrameTimestamp = performance.now();
     animationFrameHandle = window.requestAnimationFrame(tick);
+
 };
 
 function tick(timestamp){   

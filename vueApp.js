@@ -4,7 +4,8 @@ const app = Vue.createApp({
             calculating : true,
             pointsCalculated : 0,
             pointsInCanvas: 0,
-            maxFrequency : 0
+            maxFrequency : 0,
+            autoResetThreshold : 0.1
         }
     },
     methods: {
@@ -34,11 +35,24 @@ const app = Vue.createApp({
             link.setAttribute('download', `flame_${Date.now()}.png`);
             link.setAttribute('href', canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
             link.click();
+        },
+        checkAutoReset(){
+            if(this.drawPercentage < this.autoResetThreshold){
+                this.resetAndReroll();
+                console.log('autoReset');
+            }
         }
     },
     computed: {
         drawPercentage(){
             return ((this.pointsInCanvas / this.pointsCalculated) * 100).toFixed(2);
+        }
+    },
+    watch: {
+        pointsCalculated(val) {
+            if(val>10000){
+                this.checkAutoReset();
+            }
         }
     }
 })
