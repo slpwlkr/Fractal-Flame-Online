@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>Fractal Flame Online</title>
+    <link href="./style.css" rel="stylesheet" />
+    <script src="https://unpkg.com/vue@next"></script>
+    <link href="./modules/bulma.css" rel="stylesheet" /
+    </head>
+    <body>
+        <div class="columns is-vcentered is-centered">
+            <div class="column is-one-third">
+                <div class="box">
+                    <div id="app">
+                        <h1 class="title">火焰分形生成器</h1>
+                        <button class="button"  @click="resetAndReroll">重置</button>
+                        <button class="button" @click="toggleCalculation">{{calculating ? "暂停计算" : "恢复计算"}}</button>
+                        <button class="button" :disabled="calculating" @click="renderImage">渲染</button>
+                        <button class="button" @click="saveImage">保存图像</button><a id="save-image-link"></a>
+                        <div class="content">
+                            <p>已计算点 : {{ pointsCalculated }}</p>
+                            <p>落在画布上的点 : {{ pointsInCanvas }} ({{ drawPercentage }}%)</p>
+                            <p>最大采样频率: {{ maxFrequency }}</p>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            <div class="column">
+                <div class="box">
+                    <canvas id="canvas" width="640" height="640"></canvas>
+                </div>
+            </div>
+        </div>
+        <script src="./vueApp.js"></script>
+        <script src="./flameCanvas.js"></script>
+    </body>
+</html>
